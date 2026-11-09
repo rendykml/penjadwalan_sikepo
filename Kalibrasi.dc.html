@@ -1,0 +1,1232 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <title>SiKEPo — Pemeriksaan Berkala: Kalibrasi</title>
+    <script src="./vendor/react.js"></script>
+    <script src="./vendor/react-dom.js"></script>
+    <script src="./support.js"></script>
+  </head>
+  <body>
+    <x-dc>
+      <helmet>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap"
+        />
+        <style>
+          body {
+            margin: 0;
+            background: #f5f6f8;
+          }
+          a {
+            color: #111827;
+          }
+          a:hover {
+            color: #b3121a;
+          }
+          .mono {
+            font-family: "JetBrains Mono", ui-monospace, monospace;
+            font-size: 12.5px;
+          }
+          .num {
+            font-variant-numeric: tabular-nums;
+          }
+          .nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 40px;
+            padding: 0 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            text-decoration: none;
+          }
+          .nav:hover {
+            background: #f3f4f6;
+            color: #111827;
+          }
+          .subnav {
+            display: flex;
+            align-items: center;
+            min-height: 36px;
+            padding: 0 12px 0 40px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #4b5563;
+            text-decoration: none;
+          }
+          .subnav:hover {
+            background: #f3f4f6;
+            color: #111827;
+          }
+          .th {
+            font-size: 12px;
+            font-weight: 600;
+            color: #4b5563;
+            text-align: left;
+            padding: 11px 14px;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f9fafb;
+            white-space: nowrap;
+          }
+          .td {
+            font-size: 13px;
+            color: #374151;
+            padding: 12px 14px;
+            border-bottom: 1px solid #eef0f3;
+            vertical-align: middle;
+          }
+          .sub {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 2px;
+          }
+          .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+          }
+          .btn1 {
+            height: 40px;
+            padding: 0 14px;
+            border-radius: 8px;
+            border: none;
+            background: linear-gradient(135deg, #e11d2e, #b3121a);
+            font: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            color: #ffffff;
+            cursor: pointer;
+            white-space: nowrap;
+          }
+          .btn2 {
+            height: 40px;
+            padding: 0 14px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            font: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            cursor: pointer;
+            white-space: nowrap;
+          }
+          .btn2:hover {
+            border-color: #fca5a5;
+            color: #b3121a;
+          }
+          .fl {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+          }
+          .in {
+            height: 40px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: #ffffff;
+            padding: 0 12px;
+            font: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            color: #111827;
+            box-sizing: border-box;
+            width: 100%;
+          }
+          .help {
+            font-size: 11.5px;
+            font-weight: 500;
+            color: #6b7280;
+          }
+          .card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+          }
+          button:focus-visible,
+          a:focus-visible,
+          input:focus-visible,
+          select:focus-visible,
+          textarea:focus-visible,
+          summary:focus-visible {
+            outline: 2px solid #e11d2e;
+            outline-offset: 2px;
+          }
+        </style>
+      </helmet>
+      <div
+        style="
+          font-family: &quot;Plus Jakarta Sans&quot;, system-ui, sans-serif;
+          color: #111827;
+          background: #f5f6f8;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: stretch;
+          min-height: 100vh;
+        "
+      >
+        <nav
+          aria-label="Menu utama"
+          style="
+            flex: 1 1 220px;
+            max-width: 260px;
+            min-width: 0;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            padding: 20px 12px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              padding: 4px 8px 18px;
+            "
+          >
+            <span
+              style="
+                width: 34px;
+                height: 34px;
+                border-radius: 9px;
+                background: linear-gradient(135deg, #e11d2e, #b3121a);
+                color: #ffffff;
+                font-weight: 800;
+                font-size: 14px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+              "
+              >S</span
+            >
+            <span style="display: flex; flex-direction: column"
+              ><span style="font-size: 15px; font-weight: 800">SiKEPo</span
+              ><span style="font-size: 11.5px; color: #6b7280"
+                >Telkom Test House</span
+              ></span
+            >
+          </div>
+          <a href="Dashboard.dc.html" class="nav"
+            ><svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 3h7v9H3z M14 3h7v5h-7z M14 12h7v9h-7z M3 16h7v5H3z"
+              ></path></svg
+            >Dashboard</a
+          >
+          <a href="#" class="nav"
+            ><svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M8 6h13 M8 12h13 M8 18h13 M3 6h.01 M3 12h.01 M3 18h.01"
+              ></path></svg
+            >Daftar Peralatan</a
+          >
+          <a href="Kalibrasi.dc.html" class="nav" style="color: #111827"
+            ><svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M3 5h18v16H3z M16 3v4 M8 3v4 M3 10h18"></path></svg
+            >Pemeriksaan Berkala</a
+          >
+          <a
+            href="Kalibrasi.dc.html"
+            class="subnav"
+            aria-current="page"
+            style="background: #fef2f2; color: #b91c1c; font-weight: 700"
+            >Kalibrasi</a
+          >
+          <a href="Pemeriksaan.dc.html" class="subnav">Verifikasi Fungsi</a>
+          <a href="Pemeriksaan.dc.html" class="subnav">Pengecekan Antara</a>
+          <a href="Pemeriksaan.dc.html" class="subnav">Pemeliharaan</a>
+          <a href="Verifikasi.dc.html" class="nav"
+            ><svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z M9 12l2 2 4-4"
+              ></path></svg
+            >Verifikasi</a
+          >
+          <a href="#" class="nav"
+            ><svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M7 17 17 7 M7 7h10v10"></path></svg
+            >Peminjaman</a
+          >
+        </nav>
+
+        <main
+          style="
+            flex: 999 1 640px;
+            min-width: 0;
+            padding: 28px 24px 56px;
+            box-sizing: border-box;
+          "
+        >
+          <div
+            style="
+              max-width: 1180px;
+              margin: 0 auto;
+              display: flex;
+              flex-direction: column;
+              gap: 18px;
+            "
+          >
+            <div>
+              <div style="font-size: 12.5px; color: #6b7280">
+                <a href="#" style="color: #6b7280">Pemeriksaan Berkala</a> ›
+                <b style="color: #374151">Kalibrasi</b>
+              </div>
+              <h1
+                style="
+                  margin: 6px 0 0;
+                  font-size: 26px;
+                  font-weight: 800;
+                  letter-spacing: -0.01em;
+                "
+              >
+                Kalibrasi
+              </h1>
+              <div style="margin-top: 6px; font-size: 13px; color: #6b7280">
+                Lab CAB · Per <b style="color: #374151">4 November 2026</b> ·
+                <span style="color: #92400e; font-weight: 600"
+                  >Data contoh untuk tinjauan desain</span
+                >
+              </div>
+            </div>
+
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 18px;
+                align-items: flex-start;
+              "
+            >
+              <div
+                style="
+                  flex: 999 1 600px;
+                  min-width: 0;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 18px;
+                "
+              >
+                <section aria-labelledby="h-rentang" class="card">
+                  <div
+                    style="
+                      padding: 16px 18px;
+                      display: flex;
+                      flex-wrap: wrap;
+                      justify-content: space-between;
+                      gap: 8px;
+                      align-items: baseline;
+                      border-bottom: 1px solid #eef0f3;
+                    "
+                  >
+                    <h2
+                      id="h-rentang"
+                      style="margin: 0; font-size: 15px; font-weight: 700"
+                    >
+                      1 · Masuk rentang kalibrasi
+                    </h2>
+                    <span style="font-size: 12px; color: #6b7280"
+                      >Mulai H−2 bulan · paling terlambat di atas</span
+                    >
+                  </div>
+                  <div style="overflow-x: auto">
+                    <table
+                      style="
+                        width: 100%;
+                        border-collapse: collapse;
+                        min-width: 700px;
+                      "
+                    >
+                      <thead>
+                        <tr>
+                          <th class="th" scope="col">Alat</th>
+                          <th class="th" scope="col">Cara</th>
+                          <th class="th" scope="col">Jatuh tempo</th>
+                          <th class="th" scope="col">Status</th>
+                          <th class="th" scope="col" style="text-align: right">
+                            Aksi
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <sc-for
+                          list="{{rentang}}"
+                          as="r"
+                          hint-placeholder-count="5"
+                        >
+                          <tr>
+                            <td class="td" style="{{r.bar}}">
+                              <div class="mono" style="color: #111827">
+                                {{r.aset}}
+                              </div>
+                              <div
+                                style="
+                                  font-weight: 600;
+                                  color: #111827;
+                                  margin-top: 2px;
+                                "
+                              >
+                                {{r.nama}}
+                              </div>
+                            </td>
+                            <td class="td">
+                              {{r.cara}}
+                              <div class="sub">tiap {{r.interval}}</div>
+                            </td>
+                            <td class="td num">
+                              <div style="font-weight: 600; color: #111827">
+                                {{r.due}}
+                              </div>
+                              <div style="{{r.sisaStyle}}">{{r.sisa}}</div>
+                            </td>
+                            <td class="td">
+                              <span class="pill" style="{{r.pill}}"
+                                >{{r.toneLabel}}</span
+                              >
+                            </td>
+                            <td class="td" style="text-align: right">
+                              <button
+                                type="button"
+                                class="btn2"
+                                onClick="{{r.keluar}}"
+                              >
+                                Catat alat keluar
+                              </button>
+                            </td>
+                          </tr>
+                        </sc-for>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+
+                <section aria-labelledby="h-proses" class="card">
+                  <div
+                    style="
+                      padding: 16px 18px;
+                      display: flex;
+                      flex-wrap: wrap;
+                      justify-content: space-between;
+                      gap: 8px;
+                      align-items: baseline;
+                      border-bottom: 1px solid #eef0f3;
+                    "
+                  >
+                    <h2
+                      id="h-proses"
+                      style="margin: 0; font-size: 15px; font-weight: 700"
+                    >
+                      2 · Sedang dikalibrasi
+                    </h2>
+                    <span style="font-size: 12px; color: #6b7280"
+                      >Alat sudah keluar lab · tidak tampil di kalender</span
+                    >
+                  </div>
+                  <div style="overflow-x: auto">
+                    <table
+                      style="
+                        width: 100%;
+                        border-collapse: collapse;
+                        min-width: 760px;
+                      "
+                    >
+                      <thead>
+                        <tr>
+                          <th class="th" scope="col">Alat</th>
+                          <th class="th" scope="col">Tujuan</th>
+                          <th class="th" scope="col">Keluar</th>
+                          <th class="th" scope="col">Perkiraan kembali</th>
+                          <th class="th" scope="col" style="text-align: right">
+                            Aksi
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <sc-for
+                          list="{{proses}}"
+                          as="r"
+                          hint-placeholder-count="2"
+                        >
+                          <tr style="{{r.rowStyle}}">
+                            <td class="td">
+                              <div class="mono" style="color: #111827">
+                                {{r.aset}}
+                              </div>
+                              <div
+                                style="
+                                  font-weight: 600;
+                                  color: #111827;
+                                  margin-top: 2px;
+                                "
+                              >
+                                {{r.nama}}
+                              </div>
+                            </td>
+                            <td class="td">
+                              {{r.tujuan}}
+                              <div class="sub">{{r.lab}}</div>
+                            </td>
+                            <td class="td num">{{r.keluar}}</td>
+                            <td class="td num">
+                              <div>{{r.kembali}}</div>
+                              <div style="{{r.kembaliStyle}}">
+                                {{r.kembaliNote}}
+                              </div>
+                            </td>
+                            <td
+                              class="td"
+                              style="text-align: right; white-space: nowrap"
+                            >
+                              <button
+                                type="button"
+                                class="btn2"
+                                onClick="{{r.masalah}}"
+                                style="margin-right: 6px"
+                              >
+                                Laporkan masalah
+                              </button>
+                              <button
+                                type="button"
+                                class="btn1"
+                                onClick="{{r.selesai}}"
+                              >
+                                Selesai Kalibrasi
+                              </button>
+                            </td>
+                          </tr>
+                        </sc-for>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+
+                <details class="card" style="padding: 0">
+                  <summary
+                    style="
+                      cursor: pointer;
+                      padding: 16px 18px;
+                      min-height: 24px;
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      gap: 10px;
+                      font-size: 15px;
+                      font-weight: 700;
+                      list-style: none;
+                    "
+                  >
+                    <span>3 · Belum ada jadwal</span>
+                    <span
+                      class="pill"
+                      style="
+                        background: #ffffff;
+                        color: #4b5563;
+                        border: 1px dashed #9ca3af;
+                      "
+                      >4 alat</span
+                    >
+                  </summary>
+                  <div
+                    style="
+                      padding: 0 18px 16px;
+                      font-size: 13px;
+                      color: #374151;
+                      line-height: 1.6;
+                    "
+                  >
+                    <div style="color: #6b7280; margin-bottom: 8px">
+                      Dasar kelayakan Kalibrasi, tetapi interval atau tanggal
+                      kalibrasi terakhir belum diisi. Lengkapi di Daftar
+                      Peralatan.
+                    </div>
+                    <div class="mono">[aset]/CAB · Fusion Splicer</div>
+                    <div class="mono">[aset]/CAB · Optical Talk Set</div>
+                    <div class="mono">[aset]/CAB · Thermo-hygrometer</div>
+                    <div class="mono">[aset]/CAB · Timbangan digital</div>
+                  </div>
+                </details>
+              </div>
+
+              <sc-if value="{{showPanel}}" hint-placeholder-val="{{false}}">
+                <aside
+                  aria-label="Proses"
+                  style="flex: 1 1 360px; min-width: 0"
+                >
+                  <sc-if value="{{isVerif}}" hint-placeholder-val="{{false}}">
+                    <form onSubmit="{{submit}}" class="card">
+                      <div
+                        style="
+                          padding: 18px 20px;
+                          border-bottom: 1px solid #eef0f3;
+                          display: flex;
+                          justify-content: space-between;
+                          gap: 10px;
+                          align-items: flex-start;
+                        "
+                      >
+                        <div>
+                          <div
+                            style="
+                              font-size: 12px;
+                              font-weight: 700;
+                              color: #b91c1c;
+                              text-transform: uppercase;
+                              letter-spacing: 0.04em;
+                            "
+                          >
+                            Verifikasi · setelah kalibrasi
+                          </div>
+                          <div
+                            class="mono"
+                            style="margin-top: 6px; color: #4b5563"
+                          >
+                            {{p.aset}}
+                          </div>
+                          <div
+                            style="
+                              font-size: 17px;
+                              font-weight: 800;
+                              margin-top: 2px;
+                            "
+                          >
+                            {{p.nama}}
+                          </div>
+                          <div
+                            style="
+                              font-size: 12.5px;
+                              color: #4b5563;
+                              margin-top: 6px;
+                            "
+                          >
+                            Status alat:
+                            <b style="color: #111827">Karantina</b> sampai
+                            disetujui PIC
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick="{{close}}"
+                          aria-label="Tutup"
+                          style="
+                            flex: none;
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 8px;
+                            border: 1px solid #e5e7eb;
+                            background: #ffffff;
+                            cursor: pointer;
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: #374151;
+                          "
+                        >
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            aria-hidden="true"
+                          >
+                            <path d="M18 6 6 18 M6 6l12 12"></path>
+                          </svg>
+                        </button>
+                      </div>
+
+                      <div
+                        style="
+                          padding: 18px 20px;
+                          display: flex;
+                          flex-direction: column;
+                          gap: 14px;
+                        "
+                      >
+                        <div style="font-size: 13px; font-weight: 700">
+                          Sertifikat kalibrasi
+                        </div>
+                        <label class="fl"
+                          >Nomor sertifikat <span style="color: #dc2626">*</span
+                          ><input
+                            class="in"
+                            type="text"
+                            placeholder="[No. sertifikat]"
+                        /></label>
+                        <label class="fl"
+                          >Diterbitkan oleh<input
+                            class="in"
+                            type="text"
+                            value="{{p.lab}}"
+                        /></label>
+                        <div
+                          style="
+                            display: grid;
+                            grid-template-columns: repeat(2, minmax(0, 1fr));
+                            gap: 12px;
+                          "
+                        >
+                          <label class="fl"
+                            >Tanggal kalibrasi
+                            <span style="color: #dc2626">*</span
+                            ><input
+                              class="in num"
+                              type="text"
+                              placeholder="dd/mm/yyyy"
+                          /></label>
+                          <label class="fl"
+                            >Interval<input
+                              class="in num"
+                              type="text"
+                              value="12 bulan"
+                              readonly=""
+                              style="background: #f9fafb"
+                          /></label>
+                        </div>
+                        <div class="fl">
+                          Jatuh tempo berikutnya
+                          <div
+                            class="in num"
+                            style="
+                              display: flex;
+                              align-items: center;
+                              background: #f9fafb;
+                              color: #4b5563;
+                            "
+                          >
+                            Terisi otomatis dari tanggal kalibrasi + interval
+                          </div>
+                        </div>
+                        <label class="fl"
+                          >PDF sertifikat <span style="color: #dc2626">*</span
+                          ><input
+                            class="in"
+                            type="file"
+                            accept="application/pdf"
+                            style="padding-top: 8px"
+                        /></label>
+
+                        <div
+                          style="
+                            font-size: 13px;
+                            font-weight: 700;
+                            margin-top: 4px;
+                          "
+                        >
+                          Pemeriksaan alat
+                        </div>
+                        <div
+                          style="
+                            display: flex;
+                            flex-direction: column;
+                            border: 1px solid #e5e7eb;
+                            border-radius: 8px;
+                            overflow: hidden;
+                          "
+                        >
+                          <sc-for
+                            list="{{aspek}}"
+                            as="a"
+                            hint-placeholder-count="8"
+                          >
+                            <div
+                              style="
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                gap: 10px;
+                                padding: 8px 12px;
+                                border-bottom: 1px solid #eef0f3;
+                              "
+                            >
+                              <span style="font-size: 13px; color: #374151"
+                                >{{a.label}}
+                                <span style="{{a.tagStyle}}"
+                                  >{{a.tag}}</span
+                                ></span
+                              >
+                              <select
+                                class="in"
+                                aria-label="Hasil {{a.label}}"
+                                style="width: 150px; height: 36px"
+                              >
+                                <sc-for
+                                  list="{{a.opts}}"
+                                  as="o"
+                                  hint-placeholder-count="2"
+                                  ><option>{{o}}</option></sc-for
+                                >
+                              </select>
+                            </div>
+                          </sc-for>
+                        </div>
+                        <span class="help"
+                          >Butir dan wajib/tidaknya mengikuti matriks pemicu A2.
+                          Butir yang tidak dipersyaratkan tidak
+                          ditampilkan.</span
+                        >
+                      </div>
+
+                      <div
+                        style="
+                          padding: 16px 20px;
+                          border-top: 1px solid #eef0f3;
+                          display: flex;
+                          justify-content: flex-end;
+                          gap: 10px;
+                          flex-wrap: wrap;
+                        "
+                      >
+                        <button
+                          type="button"
+                          class="btn2"
+                          onClick="{{close}}"
+                          style="height: 44px; background: #f3f4f6"
+                        >
+                          Simpan draf
+                        </button>
+                        <button
+                          type="submit"
+                          class="btn1"
+                          style="
+                            height: 44px;
+                            padding: 0 18px;
+                            box-shadow: 0 6px 16px rgba(225, 29, 46, 0.28);
+                          "
+                        >
+                          Tanda tangan &amp; ajukan ke PIC
+                        </button>
+                      </div>
+                    </form>
+                  </sc-if>
+
+                  <sc-if value="{{isMasalah}}" hint-placeholder-val="{{false}}">
+                    <form onSubmit="{{submitMasalah}}" class="card">
+                      <div
+                        style="
+                          padding: 18px 20px;
+                          border-bottom: 1px solid #eef0f3;
+                        "
+                      >
+                        <div
+                          style="
+                            font-size: 12px;
+                            font-weight: 700;
+                            color: #b91c1c;
+                            text-transform: uppercase;
+                            letter-spacing: 0.04em;
+                          "
+                        >
+                          Laporkan masalah kalibrasi
+                        </div>
+                        <div
+                          class="mono"
+                          style="margin-top: 6px; color: #4b5563"
+                        >
+                          {{p.aset}}
+                        </div>
+                        <div
+                          style="
+                            font-size: 17px;
+                            font-weight: 800;
+                            margin-top: 2px;
+                          "
+                        >
+                          {{p.nama}}
+                        </div>
+                      </div>
+                      <div
+                        style="
+                          padding: 18px 20px;
+                          display: flex;
+                          flex-direction: column;
+                          gap: 14px;
+                        "
+                      >
+                        <fieldset
+                          style="
+                            border: none;
+                            margin: 0;
+                            padding: 0;
+                            display: flex;
+                            flex-direction: column;
+                            gap: 6px;
+                          "
+                        >
+                          <legend class="fl" style="margin-bottom: 6px">
+                            Apa yang terjadi?
+                          </legend>
+                          <label
+                            style="
+                              display: inline-flex;
+                              gap: 10px;
+                              align-items: center;
+                              font-size: 13px;
+                              min-height: 32px;
+                            "
+                            ><input
+                              type="radio"
+                              name="ms"
+                              checked=""
+                              style="
+                                width: 18px;
+                                height: 18px;
+                                accent-color: #e11d2e;
+                              "
+                            />Hasil kalibrasi tidak memenuhi kriteria</label
+                          >
+                          <label
+                            style="
+                              display: inline-flex;
+                              gap: 10px;
+                              align-items: center;
+                              font-size: 13px;
+                              min-height: 32px;
+                            "
+                            ><input
+                              type="radio"
+                              name="ms"
+                              style="
+                                width: 18px;
+                                height: 18px;
+                                accent-color: #e11d2e;
+                              "
+                            />Alat rusak di lab kalibrasi</label
+                          >
+                          <label
+                            style="
+                              display: inline-flex;
+                              gap: 10px;
+                              align-items: center;
+                              font-size: 13px;
+                              min-height: 32px;
+                            "
+                            ><input
+                              type="radio"
+                              name="ms"
+                              style="
+                                width: 18px;
+                                height: 18px;
+                                accent-color: #e11d2e;
+                              "
+                            />Alat tidak dapat dikalibrasi</label
+                          >
+                        </fieldset>
+                        <label class="fl"
+                          >Keterangan <span style="color: #dc2626">*</span
+                          ><textarea
+                            class="in"
+                            rows="3"
+                            style="height: auto; padding: 10px 12px"
+                          ></textarea>
+                        </label>
+                        <div
+                          style="
+                            font-size: 12.5px;
+                            color: #7f1d1d;
+                            background: #fef2f2;
+                            border: 1px solid #fca5a5;
+                            border-radius: 8px;
+                            padding: 10px 12px;
+                            line-height: 1.5;
+                          "
+                        >
+                          Alat akan berstatus <b>Karantina</b> dan masuk
+                          peninjauan. PIC lab menerima pemberitahuan.
+                        </div>
+                      </div>
+                      <div
+                        style="
+                          padding: 16px 20px;
+                          border-top: 1px solid #eef0f3;
+                          display: flex;
+                          justify-content: flex-end;
+                          gap: 10px;
+                        "
+                      >
+                        <button
+                          type="button"
+                          class="btn2"
+                          onClick="{{close}}"
+                          style="height: 44px"
+                        >
+                          Batal
+                        </button>
+                        <button type="submit" class="btn1" style="height: 44px">
+                          Kirim laporan
+                        </button>
+                      </div>
+                    </form>
+                  </sc-if>
+
+                  <sc-if value="{{isKeluar}}" hint-placeholder-val="{{false}}">
+                    <form onSubmit="{{submitKeluar}}" class="card">
+                      <div
+                        style="
+                          padding: 18px 20px;
+                          border-bottom: 1px solid #eef0f3;
+                        "
+                      >
+                        <div
+                          style="
+                            font-size: 12px;
+                            font-weight: 700;
+                            color: #b91c1c;
+                            text-transform: uppercase;
+                            letter-spacing: 0.04em;
+                          "
+                        >
+                          Alat keluar untuk kalibrasi
+                        </div>
+                        <div
+                          class="mono"
+                          style="margin-top: 6px; color: #4b5563"
+                        >
+                          {{p.aset}}
+                        </div>
+                        <div
+                          style="
+                            font-size: 17px;
+                            font-weight: 800;
+                            margin-top: 2px;
+                          "
+                        >
+                          {{p.nama}}
+                        </div>
+                      </div>
+                      <div
+                        style="
+                          padding: 18px 20px;
+                          display: flex;
+                          flex-direction: column;
+                          gap: 14px;
+                        "
+                      >
+                        <label class="fl"
+                          >Tujuan kalibrasi<select class="in">
+                            <option>Eksternal</option>
+                            <option>Internal — Lab KAL TTH</option>
+                          </select></label
+                        >
+                        <label class="fl"
+                          >Lab kalibrasi<input
+                            class="in"
+                            type="text"
+                            placeholder="[Nama lab kalibrasi]"
+                        /></label>
+                        <div
+                          style="
+                            display: grid;
+                            grid-template-columns: repeat(2, minmax(0, 1fr));
+                            gap: 12px;
+                          "
+                        >
+                          <label class="fl"
+                            >Tanggal keluar<input
+                              class="in num"
+                              type="text"
+                              value="04/11/2026"
+                          /></label>
+                          <label class="fl"
+                            >Perkiraan kembali<input
+                              class="in num"
+                              type="text"
+                              placeholder="dd/mm/yyyy"
+                            />
+                          </label>
+                        </div>
+                      </div>
+                      <div
+                        style="
+                          padding: 16px 20px;
+                          border-top: 1px solid #eef0f3;
+                          display: flex;
+                          justify-content: flex-end;
+                          gap: 10px;
+                        "
+                      >
+                        <button
+                          type="button"
+                          class="btn2"
+                          onClick="{{close}}"
+                          style="height: 44px"
+                        >
+                          Batal
+                        </button>
+                        <button type="submit" class="btn1" style="height: 44px">
+                          Simpan — alat keluar lab
+                        </button>
+                      </div>
+                    </form>
+                  </sc-if>
+                </aside>
+              </sc-if>
+
+              <sc-if value="{{hasMsg}}" hint-placeholder-val="{{false}}">
+                <div
+                  role="status"
+                  style="
+                    flex: 1 1 360px;
+                    min-width: 0;
+                    background: #ecfdf3;
+                    border: 1px solid #86efac;
+                    border-radius: 12px;
+                    padding: 16px 18px;
+                    font-size: 13px;
+                    color: #14532d;
+                    line-height: 1.55;
+                  "
+                >
+                  <b>{{msg}}</b>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </main>
+      </div>
+    </x-dc>
+    <script
+      type="text/x-dc"
+      data-dc-script
+      data-props='{"$preview":{"width":1440,"height":1240}}'
+    >
+      var TONE = {
+        green:  { bg: '#ECFDF3', fg: '#15803D', bd: '#86EFAC', label: 'Rencanakan' },
+        orange: { bg: '#FFEDD5', fg: '#C2410C', bd: '#FDBA74', label: 'Peringatan' },
+        red:    { bg: '#FEE2E2', fg: '#B91C1C', bd: '#FCA5A5', label: 'Mendesak' },
+        late:   { bg: '#7F1D1D', fg: '#FFFFFF', bd: '#7F1D1D', label: 'Terlambat' }
+      };
+      var RENTANG = [
+        { aset: '052/CAB', nama: 'Optical Power Meter', cara: 'Eksternal', interval: '12 bulan', due: '28 Okt 2026', d: -7, tone: 'late' },
+        { aset: '058/CAB', nama: 'Optical Power Meter', cara: 'Eksternal', interval: '12 bulan', due: '12 Nov 2026', d: 8, tone: 'red' },
+        { aset: '061/CAB', nama: 'Optical Light Source', cara: 'Internal — Lab KAL', interval: '12 bulan', due: '27 Nov 2026', d: 23, tone: 'orange' },
+        { aset: '075/CAB', nama: 'Optical Attenuator', cara: 'Eksternal', interval: '24 bulan', due: '15 Des 2026', d: 41, tone: 'green' },
+        { aset: '090/CAB', nama: 'Optical Spectrum Analyzer', cara: 'Eksternal', interval: '12 bulan', due: '30 Des 2026', d: 56, tone: 'green' }
+      ];
+      var PROSES = [
+        { aset: '044/CAB', nama: 'Optical Power Meter', tujuan: 'Eksternal', lab: '[Lab kalibrasi eksternal]', keluar: '14 Okt 2026', kembali: '11 Nov 2026', lewat: false },
+        { aset: '067/CAB', nama: 'Optical Light Source', tujuan: 'Internal', lab: 'Lab KAL TTH', keluar: '20 Okt 2026', kembali: '03 Nov 2026', lewat: true }
+      ];
+      var ASPEK = [
+        ['a. Identitas alat', 'W'], ['b. Kelengkapan aksesori dan manual', 'K'], ['c. Versi software/firmware', 'K'],
+        ['d. Kondisi fisik', 'W'], ['e. Keutuhan label status dan void', 'W'], ['f. Fungsi kerja', 'W'],
+        ['g. Karakteristik metrologi (alat standar)', 'K'], ['h. Sertifikat kalibrasi', 'W']
+      ];
+      class Component extends DCLogic {
+        constructor(p) { super(p); this.state = { mode: null, row: null, msg: '' }; }
+        renderVals() {
+          var self = this, s = this.state;
+          var rentang = RENTANG.map(function (r) {
+            var T = TONE[r.tone];
+            return Object.assign({}, r, {
+              toneLabel: T.label,
+              pill: 'background:' + T.bg + ';color:' + T.fg + ';border:1px solid ' + T.bd,
+              bar: r.tone === 'late' ? 'box-shadow: inset 4px 0 0 #7F1D1D' : (r.tone === 'red' ? 'box-shadow: inset 4px 0 0 #DC2626' : ''),
+              sisa: r.d < 0 ? (-r.d) + ' hari lewat' : r.d + ' hari lagi',
+              sisaStyle: 'font-size:12px;margin-top:2px;font-weight:' + (r.d < 0 || r.tone === 'red' ? '700' : '500') + ';color:' + (r.d < 0 ? '#7F1D1D' : (r.tone === 'red' ? '#B91C1C' : '#6B7280')),
+              keluar: function () { self.setState({ mode: 'keluar', row: r, msg: '' }); }
+            });
+          });
+          var proses = PROSES.map(function (r) {
+            var on = s.row && s.row.aset === r.aset;
+            return Object.assign({}, r, {
+              rowStyle: on ? 'background:#FEF2F2' : '',
+              kembaliNote: r.lewat ? 'Melewati perkiraan' : '',
+              kembaliStyle: 'font-size:12px;margin-top:2px;font-weight:700;color:#B91C1C',
+              selesai: function () { self.setState({ mode: 'verif', row: r, msg: '' }); },
+              masalah: function () { self.setState({ mode: 'masalah', row: r, msg: '' }); }
+            });
+          });
+          var aspek = ASPEK.map(function (a) {
+            var w = a[1] === 'W';
+            return {
+              label: a[0], tag: w ? 'Wajib' : 'Bila relevan',
+              tagStyle: 'font-size:11px;font-weight:700;margin-left:4px;color:' + (w ? '#B91C1C' : '#6B7280'),
+              opts: w ? ['— pilih —', 'Sesuai', 'Tidak Sesuai'] : ['— pilih —', 'Sesuai', 'Tidak Sesuai', 'Tidak Berlaku']
+            };
+          });
+          var p = s.row || {};
+          var done = function (text) { return function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ mode: null, row: null, msg: text }); }; };
+          return {
+            rentang: rentang, proses: proses, aspek: aspek, p: p,
+            showPanel: !!s.mode, isVerif: s.mode === 'verif', isMasalah: s.mode === 'masalah', isKeluar: s.mode === 'keluar',
+            hasMsg: !s.mode && !!s.msg, msg: s.msg,
+            close: function () { self.setState({ mode: null, row: null }); },
+            submit: done((p.aset || '') + ': verifikasi diajukan ke PIC (Manager Lab CAB). Alat Karantina sampai disetujui.'),
+            submitMasalah: done((p.aset || '') + ': laporan terkirim. Alat Karantina dan masuk peninjauan.'),
+            submitKeluar: done((p.aset || '') + ': tercatat keluar lab dan pindah ke daftar Sedang dikalibrasi.')
+          };
+        }
+      }
+    </script>
+  </body>
+</html>
